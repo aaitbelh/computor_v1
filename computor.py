@@ -179,6 +179,7 @@ def computer(equation):
 		result['degree'] = 2
 		discriminant = equationDict['1'] ** 2 - 4 * equationDict['0'] * equationDict['2']
 		result['discriminant'] = discriminant
+		print(f"disciiiiiiiiiiiiiiiiii-> {result['discriminant']}")
 		if discriminant > 0:
 			result['solution1'] = (-1 * equationDict['1'] - discriminant**(1 / 2)) / (2 * equationDict['2'])
 			result['solution2'] = (-1 * equationDict['1'] + discriminant**(1 / 2)) / (2 * equationDict['2'])
@@ -214,4 +215,4 @@ if __name__ == '__main__':
 	# 	exit(1)
 
 	# else:
-	_ = computer("-5.2 + 4 * X - X^2= X^2")
+	_ = computer("5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0")

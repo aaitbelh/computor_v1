@@ -1,9 +1,21 @@
 import sys
-import re
+import re, math
 
-def solveEquation(equation):
-    
-
+def solveEquation(equation, result):
+    if result['exponent'] == 2 and equation[2] != 0:
+        result['discriminant'] = equation[1] ** 2 - (4 * equation[2] * equation[0])
+        if result['discriminant'] == 0:
+            result['solution'] = -1 * equation[1] / 2 * equation[2]
+        elif result['discriminant'] > 0:
+            result['solution'] = (-1 * equation[1] - math.sqrt(result['discriminant'])) / (2 * equation[2])
+            result['solution2'] = (-1 * equation[1] + math.sqrt(result['discriminant'])) / (2 * equation[2])
+        else:
+            print(f"The discriminant is negative, so the quadratic equation has two complex solutions")
+    elif result['exponent'] == 1:
+        result['solution'] = -1 * equation['1'] / equation[2]
+    elif result['exponent'] == 0:
+        result = None
+    return result
 def reducedForm(equation):
 
     sortedEquation = list(sorted(equation.keys()))
@@ -125,12 +137,17 @@ def HeadFunction(equation):
             equaDict[i['polynome']] = i['denominateur']
         
     print(equaDict)
-    polMax = reducedForm(equaDict)
-    if(polMax > 2):
+    result["exponent"] = reducedForm(equaDict)
+    if(result['exponent'] > 2):
         print('The polynomial degree is stricly greater than 2, I can\'t solve.')
         return result
-    result = solveEquation(equaDict)
-
+    result = solveEquation(equaDict, result)
+    if result == None:
+        print('there is no solution')
+    elif result['solution'] == None and result['exponent'] == 1 and result['solution2']:
+        print(f"equation degre: {result['exponent']}", f"the one soltuion is {result['solution']}")
+    else:
+        print("the equation has two solutions: ", f"solution1: {result['solution']}\n, solution2:{result['solution2']}")
 
 if __name__ == "__main__":
     # if len(sys.argv) != 2:
@@ -138,5 +155,5 @@ if __name__ == "__main__":
     #     exit(1)
     
     # equation = sys.argv[1]
-    result = HeadFunction("-5 + 4 * X - X^2= X^2")
+    result = HeadFunction("5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0")
     exit(0)

@@ -7,7 +7,7 @@ def convert_float_to_coprime_fraction(x):
     return Fraction(x).limit_denominator()
 
 def printResults(result):
-    if result['solution'] == None:
+    if result['solution'] == False:
         print('Solution is all real numbers')
     else:
         if result['discriminant'] is None and result['exponent'] == 1:
@@ -17,10 +17,10 @@ def printResults(result):
                 result['solution'] = int(result['solution'])
             print('Polynomial degree: 1')
             print('The solution is:\n{}'.format(result['solution']))
-        elif result['discriminant'] == 0 and result['exponent'] == 2:
+        elif result['exponent'] == 2 and result['discriminant'] == 0:
             print('Polynomial degree: 2')
             print('Discriminant is null, the solutions is:\n{}'.format(result['solution']))
-        elif result['discriminant'] < 0 and result['exponent'] == 2:
+        elif result['exponent'] == 2 and result['discriminant'] < 0 :
             print('Polynomial degree: 2')
             print('Discriminant is strictly negative, the two solutions are:\n{}\n{}'.format(result['solution'], result['solution2']))
         else:
@@ -56,7 +56,7 @@ def solveEquation(equation, result):
         if res % 1 != 0:
             res = convert_float_to_coprime_fraction(res)
         result["solution"] = res
-    elif result['exponent'] == 0 and b != 0:
+    elif '0' in equation and equation['0'] != 0:
         result['solution'] = False
     else:
          print("there is no solution")
